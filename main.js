@@ -1,13 +1,17 @@
 const catalogue = document.querySelector('.catalogue');
+const productSelect = document.querySelector('.product')
 
 const api = async() =>{
     try {
         const url = await fetch('https://api.escuelajs.co/api/v1/products')
         const products = await(url.json())
-        products.map( pro =>{
+        let aux;
+        products.map( (pro,i) =>{
             console.log(pro)
             let divProduct = document.createElement('div')
             let pProduct = document.createElement('p')
+            let pSelect = document.createElement('p') //datos izq
+            let imgSelect = document.createElement('img') //img izq
             let imgProduct = document.createElement('img')
             let buttonTrolley = document.createElement('button')
             // pProduct.appendChild(document.createTextNode(`Precio: ${pro.price}, Categoria: ${pro.category.name}`))
@@ -26,7 +30,26 @@ const api = async() =>{
             buttonTrolley.classList.add('btn-trolley')
             divProduct.appendChild(buttonTrolley)
             catalogue.appendChild(divProduct)
+
+            //Lado izq
+            divProduct.addEventListener('click', () =>{
+                aux = i
+                console.log(i)
+                productSelect.innerHTML = "";
+                imgSelect.setAttribute('src',products[i].images)
+                pSelect.innerHTML = (`<p><b>Precio:</b> ${products[i].price}</p> <p><b>Categoria:</b> ${products[i].category.name}</p> <p><b>Desacripcion:</b> ${products[i].description}</p> <p> <b>Folio:</b> ${products[i].id}</p>`)
+                productSelect.appendChild(imgSelect) //Pocision en la que se acomodan
+                productSelect.appendChild(pSelect)
+                imgSelect.classList.add('img-productSelect')
+            
+                // productSelect.appendChild(document.createTextNode(`Precio: ${pro[].price}, Categoria: ${pro[].category.name}`))
+
+            });
+            // console.log(aux)
         });
+
+        
+
         
         // catalogue.appendChild()
     } catch (err) {
