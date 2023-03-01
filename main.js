@@ -6,7 +6,8 @@ const api = async() =>{
             const url = await fetch('https://api.escuelajs.co/api/v1/products')
             const products = await(url.json())
             let aux;
-            const arrTrolley = products.map( (pro,i) =>{
+            products.map( (pro,i) =>{
+                // debugger
                 let divProduct = document.createElement('div')
                 let dataProduct = document.createElement('div')
                 let divSelect = document.createElement('div') //datos izq
@@ -15,6 +16,8 @@ const api = async() =>{
                 let imgProduct = document.createElement('img')
                 let buttonTrolley = document.createElement('button')
                 // pProduct.appendChild(document.createTextNode(`Precio: ${pro.price}, Categoria: ${pro.category.name}`))
+                pro['status'] = true;
+                // console.log(pro);
                 dataProduct.innerHTML = (`<p><b>Precio:</b> ${pro.price}</p> <p><b>Categoria:</b> ${pro.category.name}</p> <p><b>Desacripcion:</b> ${pro.description}</p> <p> <b>Folio:</b> ${pro.id}</p>`)
                 imgProduct.setAttribute('src',pro.images)
                 divProduct.appendChild(imgProduct)
@@ -30,6 +33,8 @@ const api = async() =>{
                 buttonTrolley.classList.add('btn-trolley')
                 divProduct.appendChild(buttonTrolley)
                 catalogue.appendChild(divProduct)
+                // buttonTrolley.setAttribute("disable","true")
+                // buttonTrolley.disabled=true
 
                 //Lado izq
                 divProduct.addEventListener('click', () =>{
@@ -45,20 +50,31 @@ const api = async() =>{
                     productSelect.appendChild(btnTrolleySelect);
                     // productSelect.appendChild(document.createTextNode(`Precio: ${pro[].price}, Categoria: ${pro[].category.name}`))
                 });
-                // console.log(aux)
-                // const arr = [], arraux=[]
-                // buttonTrolley.addEventListener('click', () =>{
-                //     console.log(i)
-                //     arraux = [...arraux,i]
-                //     console.log(arraux)
-                // });
-                
+                buttonTrolley.addEventListener('click', () =>{
+                    pushArr(i,products)
+                    products[i].status == true ? buttonTrolley.disabled = false : buttonTrolley.disabled = true;
+                    products[i].status == true ? btnTrolleySelect.disabled = false : btnTrolleySelect.disabled = true;
+                });
+                btnTrolleySelect.addEventListener('click', () =>{
+                    pushArr(i,products)
+                    products[i].status == true ? buttonTrolley.disabled = false : buttonTrolley.disabled = true;
+                    products[i].status == true ? btnTrolleySelect.disabled = false : btnTrolleySelect.disabled = true;
+                });
             });
             
-            // console.log(arrTrolley)
+            let arrAux = [];
+            let addTR
+            const pushArr = (i,products) =>{
+                arrAux =[...arrAux,i];
+                const addTrolley = arrAux.map ((e)=>{
+                    products[e].status = false;
+                    return products[e];
+                });
 
-
-        // catalogue.appendChild()
+                console.log(addTrolley);
+                console.log(addTrolley.length);
+            }
+            
     } catch (err) {
         console.log(err)
     }
