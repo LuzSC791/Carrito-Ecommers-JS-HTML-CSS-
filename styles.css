@@ -39,21 +39,32 @@ h2.title{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    overflow-y: scroll;
     width: 60%;
+    margin-left: 1%;
 }
 
 .product{
     width: 38%;
     height: 15%;
     background-color: rgb(229, 225, 225);
-    margin: 2%;
-    border-radius: 5%;
+    margin: 1%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    /* justify-items: center; */
+    align-items: center;
+    /* justify-content: center; */
     /* border:2px solid thick; */
 }
 
 .data-product{
     /* border: 2px solid yellow; */
+    background-color:  rgb(211, 205, 205);
+    width: 60%;
     text-align: center;
+    border-radius: 10px;
     margin: 10px;
 }
 
@@ -77,19 +88,20 @@ h2.title{
     background-color: rgb(229, 225, 225); 
     color: rgb(87, 86, 86);
     margin-bottom: 2%;
-    border-radius: 3%;
+    border-radius: 10px;
     justify-content: space-between;
     margin-top: 2%;
     /* border: 2px solid royalblue; */
 }
 
 .container-product:hover{
-    background-color: rgb(98, 98, 98);
+    background-color: rgb(164, 164, 164);
     cursor: pointer;
-    color:rgb(229, 225, 225);
+    /* color:rgb(229, 225, 225); */
     font-weight: bold;
     /* border:2px solid thick; */
 }
+
 
 .container-product:hover .btn-trolley{
     background-color: rgb(246, 126, 6);
@@ -102,7 +114,7 @@ h2.title{
     width: 10%;
     cursor: pointer;
     border: transparent;
-    border-radius: 6%;
+    border-radius: 15px;
 }
 
 .ec-trolley{
@@ -120,8 +132,38 @@ h2.title{
 }
 
 .img-productSelect{
-    width: 90%;
+    width: 85%;
+    margin-top: 3%;
     /* padding: 1%; */
     /* height: 80%; */
-    border-radius: 10%;
+    border-radius: 10px;
+}
+
+.div-select{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:space-between;
+    width: 80%;
+    margin: 3% 0;
+    border-radius: 10px;
+    background-color:  rgb(205, 201, 201);
+    padding-left: 4%;
+    /* align-content: center; */
+    /* border: 2px solid red; */
+}
+
+.btn-trolleyS{
+    background-color: rgb(255, 255, 44);
+    width: 85%;
+    cursor: pointer;
+    border: transparent;
+    border-radius: 15px;
+    margin-bottom: 5%;
+}
+
+.btn-trolleyS:hover{
+    background-color: rgb(246, 126, 6);
+    cursor: pointer;
+
 }
