@@ -183,7 +183,7 @@ h2.title{
 }
 
 .options{
-    width: 70%;
+    width: 45%;
     padding: 1%;
     background-color: rgb(229, 225, 225); 
     border-radius: 10px;
@@ -199,5 +199,48 @@ h2.title{
 }
 
 .btn-delete:hover{
+    cursor: pointer;
+}
+
+.btn-add{
+    width: 35%;
+    border-radius: 50px;
+    /* border: transparent; */
+    background-color: rgb(246, 126, 6);
+}
+
+.btn-less>svg{
+    width: 26px;
+    margin-top: 4%;
+    /* background-color: rgb(246, 126, 6); */
+}
+
+.btn-add>svg{
+    /* width: 26px; */
+    margin-top: 4%;
+    /* background-color: rgb(246, 126, 6); */
+}
+.btn-less{
+    width: 35%;
+    border-radius: 50px;
+    /* border: transparent; */
+    background-color: rgb(255, 255, 44);
+}
+
+.btn-action{
+    width: 35%;
+    display: flex;
+    margin-top:1%;
+    /* justify-content: space-around; */
+    justify-content: space-evenly;
+    margin-left: 20%;
+}
+
+.btn-less:hover{
+    background-color: rgba(91, 91, 249, 0.871);
+    cursor: pointer;
+}
+.btn-add:hover{
+    background-color: rgba(91, 91, 249, 0.871);
     cursor: pointer;
 }
