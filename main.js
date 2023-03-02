@@ -19,7 +19,8 @@ const api = async() =>{
                 // pProduct.appendChild(document.createTextNode(`Precio: ${pro.price}, Categoria: ${pro.category.name}`))
                 pro['status'] = true;
                 pro['productAdd'] = 0;
-                pro['payProduct'] ;
+                pro['payProduct'];
+                // pro['payTotal'];
                 // console.log(pro);
                 dataProduct.innerHTML = (`<p><b>Precio:</b> ${pro.price}</p> <p><b>Categoria:</b> ${pro.category.name}</p> <p><b>Desacripcion:</b> ${pro.description}</p> <p> <b>Folio:</b> ${pro.id}</p>`)
                 imgProduct.setAttribute('src',pro.images)
@@ -40,6 +41,7 @@ const api = async() =>{
                 // buttonTrolley.disabled=true
 
                 //Lado izq
+                let aux2;
                 divProduct.addEventListener('click', () =>{
                     productSelect.innerHTML = "";
                     imgSelect.setAttribute('src',products[i].images)
@@ -58,6 +60,9 @@ const api = async() =>{
                     products[i].status == true ? buttonTrolley.disabled = false : buttonTrolley.disabled = true;
                     products[i].status == true ? btnTrolleySelect.disabled = false : btnTrolleySelect.disabled = true;
                     pro.productAdd = 1;
+                    // console.log(pro.payProduct)
+                    // console.log(pro.payTotal)
+                    // console.log(pro.payAdd)
                     // pro.payProduct=pro.price*pro.productAdd;
                     // console.log(`Valor: ${pro.payProduct}`);
                 });
@@ -67,16 +72,17 @@ const api = async() =>{
                     products[i].status == true ? buttonTrolley.disabled = false : buttonTrolley.disabled = true;
                     products[i].status == true ? btnTrolleySelect.disabled = false : btnTrolleySelect.disabled = true;
                     pro.productAdd = 1;
+                    // aux = pro
+                    // console.log(pro.payTotal)
+                    console.log(pro.payProduct)
                     // pro.payProduct=pro.price*pro.productAdd;
                     // console.log(`Valor: ${pro.payProduct}`);
-
-                    
-
                 });
                 
             });
             
             let arrAux = [];
+            
             const pushArr = (i,products) =>{
                 const options = document.createElement('div'); //desplega añadidos al carrito
                 options.classList.add('options');
@@ -102,13 +108,18 @@ const api = async() =>{
                     products[e].status = false;
                     return products[e];
                 });
-                console.log(addTrolley);
-                console.log(addTrolley.length);
+                // console.log(addTrolley);
+                // console.log(addTrolley.length); //SE VA A OCUPAR
                 let count = 0;
-                let count2 = 0;
-                addTrolley.map(tro =>{
+                let payTotal = 0;
+
+                let auxTotal = 0
+                let auxTotal2 = 0
+                // let payTotal; 
+                let arrTotal = []
+                const addTrolley2 = addTrolley.map((tro,i) =>{
                     imgOption.setAttribute('src',tro.images);
-                    console.log(`VALOR: ${tro.productAdd}`);
+                    // console.log(`VALOR: ${tro.productAdd}`);
                     count += tro.price
                     btnDelete.innerHTML = `<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m20.015 6.506h-16v14.423c0 .591.448 1.071 1 1.071h14c.552 0 1-.48 1-1.071 0-3.905 0-14.423 0-14.423zm-5.75 2.494c.414 0 .75.336.75.75v8.5c0 .414-.336.75-.75.75s-.75-.336-.75-.75v-8.5c0-.414.336-.75.75-.75zm-4.5 0c.414 0 .75.336.75.75v8.5c0 .414-.336.75-.75.75s-.75-.336-.75-.75v-8.5c0-.414.336-.75.75-.75zm-.75-5v-1c0-.535.474-1 1-1h4c.526 0 1 .465 1 1v1h5.254c.412 0 .746.335.746.747s-.334.747-.746.747h-16.507c-.413 0-.747-.335-.747-.747s.334-.747.747-.747zm4.5 0v-.5h-3v.5z" fill-rule="nonzero"/> </svg>`
                     btnAdd.innerHTML = `<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm.5 10h6v1h-6v6h-1v-6h-6v-1h6v-6h1v6z"/></svg>`
@@ -116,13 +127,32 @@ const api = async() =>{
 
                     btnAdd.addEventListener('click',()=>{
                         tro.productAdd ++; 
-                        console.log(`Se añadio: ${tro.productAdd}`);
+                        // console.log(`Se añadio: ${tro.productAdd}`);
                         // pro.productAdd *= countProduct
                         // tro.payProduct=tro.price*tro.productAdd;
                         // console.log(`V: ${tro.payProduct}`);
                         totalElement.innerHTML = " "
                         tro.payProduct = tro.price * tro.productAdd;
-                        totalElement.innerHTML = `<p><b>Precio $ ${tro.payProduct}</b> - ${tro.productAdd} Unidades`;
+                        totalElement.innerHTML = `<p><b>Precio $ ${tro.payProduct}</b> - ${tro.productAdd}Unidades`;
+                        // payTotal += tro.payProduct;
+                        // console.log(`VALOR: ${tro.payProduct}`);
+                        // arrTotal = tro.payProduct;
+                        // console.log(`Posicion:${i} - Valor: ${arrTotal}`);
+                        // console.log(`TOTAL: ${arrTotal}`);
+                        console.log(`TOTAL: ${tro.payProduct}`);
+                        console.log(`TL: ${tro.id}`);
+                        // console.log(tro.payProduct)
+                        // payTotal += tro.payProduct
+                        // console.log(payTotal)
+                        // console.log(tro.payProduct)
+                        // console.log(tro.payAdd)
+
+                        // total (tro,i);
+                        // console.log(`ooo ${tro}`)
+                        // divTotal.innerHTML = "";
+                        // divTotal.innerHTML = `<p><b>TOTAL:${payTotal}</p></b>`;
+                        // navOption.appendChild(divTotal);
+
                     });
                     
                     btnLess.addEventListener('click',()=>{
@@ -130,15 +160,28 @@ const api = async() =>{
                         tro.productAdd === 0 ? console.log("Semanda llamar funcion delete") : tro.productAdd --; 
                         // tro.productAdd === 0 ? deleteProduct() : tro.productAdd --; 
                         // pro.productAdd *= countProduct
-                        console.log(`Se elimino: ${tro.productAdd}`);
+                        // console.log(`Se elimino: ${tro.productAdd}`);
                         // tro.payProduct=tro.price*tro.productAdd;
                         // console.log(`VALOR: ${tro.payProduct}`);
 
                         //PINTARLO ACA Y LIMPIARLO
+                        tro.payProduct--;
                         totalElement.innerHTML = " ";
                         tro.payProduct = tro.price * tro.productAdd;
-                        totalElement.innerHTML = `<p><b>Precio $ ${tro.payProduct}</b> - ${tro.productAdd} Unidades`;
+                        totalElement.innerHTML = `<p><b>Precio $ ${tro.payProduct}</b> - ${tro.productAdd}Unidades`;
+                        // console.log(`VALOR: ${tro.payProduct}`);
+                        // total (tro,i);
+                        // arrTotal = tro.payProduct;
+                        // console.log(`Posicion:${i} - Valor: ${arrTotal}`);
+                        console.log(`TOTAL: ${tro.payProduct}`);
+                        // console.log(`TL: ${tro}`);
+                        console.log(`TL: ${tro.id}`);
+                        // payTotal += tro.payProduct;
+                        // divTotal.innerHTML = "";
+                        // divTotal.innerHTML = `<p><b>TOTAL:${payTotal}</p></b>`;
+                        // navOption.appendChild(divTotal);
                     });
+                    // console.log(tro)
 
                     // count2=tro.price*tro.productAdd;
                     // // console.log(typeof tro.payProduct)
@@ -147,7 +190,10 @@ const api = async() =>{
 
                     options.innerHTML = (`<p><b>Precio $</b> ${tro.price}</p> <p><b>Desacripcion:</b> ${tro.description}</p>`);
 
-                    console.log(count)
+                    
+
+
+                    // console.log(count)
                     contOptions.appendChild(imgOption);
                     contOptions.appendChild(options);
                     options.appendChild(totalElement);
@@ -156,13 +202,45 @@ const api = async() =>{
                     action.appendChild(btnAdd)
                     action.appendChild(btnLess)
                     navOption.appendChild(contOptions);
+                    // console.log(`Dentro: ${payTotal}`);
                 });
-                divTotal.innerHTML = `<p><b>TOTAL:${count}</p></b>`;
-                navOption.appendChild(divTotal);
+
+                addTrolley2.map(pro =>{
+                    // console.log(`Aca ${pro}`)
+                    // console.log(`ESTE ${pro.payProduct}`)
+                })
+                
+                // console.log(`FUERA: ${payTotal}`);
 
                 // SE ME OCURRE HACER OTRO MAPEO Y SOLO RELIZAR EL MAPERO PARA EL PRECIO
                 // E IMPRIMIERLO AL ULTIMO
             }
+            
+
+            const total = (tro ,i) =>{
+                auxTotal = tro.payProduct 
+                console.log(`Posicion: ${i} - Valor: ${auxTotal}`)
+                // arrTotal[i] = auxTotal;
+                // console.log(arrTotal);
+                // arrTotal = 
+                // console.log(arrTotal);
+                // console.log(`HACE ESTO ${i}`);
+                // const payTotal = arrTotal.reduce(
+                //     (accumulator, currentValue) => accumulator + currentValue,0
+                //   );
+                  
+                // console.log(payTotal);
+            }
+
+            let opc = document.querySelector('.ec-trolley');
+            let nav = document.querySelector('.nav-option');
+            opc.addEventListener('click', () =>{
+                if (Object.entries(nav.style.display).length==0)
+                    nav.style.display = "none";
+
+                nav.style.display == "none" ? nav.style.display = "block"
+                    : nav.style.display = "none"
+            });
 
             const deleteProduct = (i,products) =>{
                 
