@@ -36,7 +36,6 @@ h2.title{
 .nav-catalogue{
     display: flex;
     width: 100%;
-    height: 30%;
 }
 
 .catalogue{
@@ -161,7 +160,7 @@ h2.title{
 .nav-option{
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     background-color: white;
     width: 50%;
     max-height: 80%;
@@ -219,7 +218,6 @@ h2.title{
 .btn-less{
     width: 35%;
     border-radius: 50px;
-    /* border: transparent; */
     background-color: rgb(255, 255, 44);
 }
 
