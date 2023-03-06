@@ -2,7 +2,6 @@ const catalogue = document.querySelector('.catalogue');
 const productSelect = document.querySelector('.product');
 const navOption = document.querySelector('.nav-option');
 const pay = document.querySelector('.pay');
-
 let arrAux = [];
 
 const api = async() =>{
@@ -50,22 +49,19 @@ const api = async() =>{
                     btnTrolleySelect.classList.add('btn-trolleyS')
                     productSelect.appendChild(btnTrolleySelect);
                 });
-                /////******** */
-                products[i].status == false ? buttonTrolley.disabled = true : buttonTrolley.disabled = false;
-                products[i].status == false ? btnTrolleySelect.disabled = true : btnTrolleySelect.disabled = false;
-                /////******** */
-
                 buttonTrolley.addEventListener('click', () =>{
-                    pushArr(i,products)
-                    products[i].status == true ? buttonTrolley.disabled = false : buttonTrolley.disabled = true;
-                    products[i].status == true ? btnTrolleySelect.disabled = false : btnTrolleySelect.disabled = true;
+                    products[i].delete = false;
+                    pushArr(i,products,buttonTrolley)
+                    products[i].status = false;
+                    products[i].status == false ? buttonTrolley.disabled = true : buttonTrolley.disabled = false;
+                    products[i].status == false ? btnTrolleySelect.disabled = true : btnTrolleySelect.disabled = false;
                     pro.productAdd = 1;
                     const price = pro.price;
                     pro.totalProduct = pro.productAdd * price;
                 });
 
                 btnTrolleySelect.addEventListener('click', () =>{
-                    pushArr(i,products)
+                    pushArr(i,products) 
                     products[i].status == true ? buttonTrolley.disabled = false : buttonTrolley.disabled = true;
                     products[i].status == true ? btnTrolleySelect.disabled = false : btnTrolleySelect.disabled = true;
                     pro.productAdd = 1;
@@ -76,8 +72,7 @@ const api = async() =>{
             });
             
             let arrTotal = [];
-            const pushArr = (i,products) =>{
-                
+            const pushArr = (i,products,buttonTrolley) =>{
                 const options = document.createElement('div'); 
                 options.classList.add('options');
                 const totalElement = document.createElement('p'); 
@@ -99,7 +94,6 @@ const api = async() =>{
                 divTotal = document.createElement('div');
                 divTotal.classList.add('total')
 
-                
                 arrAux =[...arrAux,i];
                 let addTrolley = arrAux.map ((e)=>{
                     products[e].status = false;
@@ -108,8 +102,9 @@ const api = async() =>{
                 
                 const index = addTrolley.length
                 btnDelete.addEventListener('click',() =>{
-
-                    products[i].delete == false ? products[i].delete = true : products[i].delete = false;
+                    products[i].delete = true;
+                    products[i].status = true
+                    buttonTrolley.disabled = false;
                     contOptions.innerHTML = " ";
                     products[i].totalProduct = 0;
                     arrTotal[index-1] = products[i].totalProduct; 
@@ -120,14 +115,14 @@ const api = async() =>{
 
                addTrolley = addTrolley.filter(e => {
                     return e.delete === false});
+                
                 addTrolley.map((tro,i) =>{
                     imgOption.setAttribute('src',tro.images);
                     btnDelete.innerHTML = `<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m20.015 6.506h-16v14.423c0 .591.448 1.071 1 1.071h14c.552 0 1-.48 1-1.071 0-3.905 0-14.423 0-14.423zm-5.75 2.494c.414 0 .75.336.75.75v8.5c0 .414-.336.75-.75.75s-.75-.336-.75-.75v-8.5c0-.414.336-.75.75-.75zm-4.5 0c.414 0 .75.336.75.75v8.5c0 .414-.336.75-.75.75s-.75-.336-.75-.75v-8.5c0-.414.336-.75.75-.75zm-.75-5v-1c0-.535.474-1 1-1h4c.526 0 1 .465 1 1v1h5.254c.412 0 .746.335.746.747s-.334.747-.746.747h-16.507c-.413 0-.747-.335-.747-.747s.334-.747.747-.747zm4.5 0v-.5h-3v.5z" fill-rule="nonzero"/> </svg>`
                     btnAdd.innerHTML = `<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M11.5 0c6.347 0 11.5 5.153 11.5 11.5s-5.153 11.5-11.5 11.5-11.5-5.153-11.5-11.5 5.153-11.5 11.5-11.5zm0 1c5.795 0 10.5 4.705 10.5 10.5s-4.705 10.5-10.5 10.5-10.5-4.705-10.5-10.5 4.705-10.5 10.5-10.5zm.5 10h6v1h-6v6h-1v-6h-6v-1h6v-6h1v6z"/></svg>`
                     btnLess.innerHTML = `<svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.002 2.005c5.518 0 9.998 4.48 9.998 9.997 0 5.518-4.48 9.998-9.998 9.998-5.517 0-9.997-4.48-9.997-9.998 0-5.517 4.48-9.997 9.997-9.997zm0 1.5c-4.69 0-8.497 3.807-8.497 8.497s3.807 8.498 8.497 8.498 8.498-3.808 8.498-8.498-3.808-8.497-8.498-8.497zm4.253 7.75h-8.5c-.414 0-.75.336-.75.75s.336.75.75.75h8.5c.414 0 .75-.336.75-.75s-.336-.75-.75-.75z" fill-rule="nonzero"/></svg>`
-                    
+                    options.innerHTML = "";
                     options.innerHTML = (`<p><b>Precio $</b> ${tro.price}</p> <p><b>Desacripcion:</b> ${tro.description}</p>`);
-
                     contOptions.appendChild(imgOption);
                     contOptions.appendChild(options);
                     contOptions.appendChild(btnDelete);
@@ -139,16 +134,13 @@ const api = async() =>{
                     navOption.appendChild(totalPay);
                 }); 
 
-                
                 btnAdd.addEventListener('click',()=>{
                     const price = products[i].price;
                     products[i].productAdd++;
-
                     products[i].totalProduct = products[i].productAdd * price;
                     totalElement.innerHTML = `<p><b>$ ${products[i].totalProduct}</b> - ${products[i].productAdd} U`;
                     arrTotal[index-1] = products[i].totalProduct; 
-                    const result = arrTotal.reduce((acm, cv) => acm + cv,0);  
-                    console.log(result);
+                    const result = arrTotal.reduce((acm, cv) => acm + cv,0);
                     pay.innerHTML = " ";
                     pay.innerHTML = `<span><b>TOTAL: $ ${result}</b></span>`;
                 });
@@ -165,20 +157,16 @@ const api = async() =>{
                 btnLess.addEventListener('click',()=>{
                     const price = products[i].price;
                     products[i].productAdd--;
-                    
-                     /////******** */
+                if(products[i].productAdd == 0){
+                    products[i].delete = true;
+                    contOptions.innerHTML = " ";
+                    products[i].status = true
+                    buttonTrolley.disabled = false;
+                }
 
-                    if(products[i].productAdd == 0)
-                        buttonTrolley.disabled = true
-                /////******** */
-
+                products[i].status == true ? buttonTrolley.disabled = false : buttonTrolley.disabled = true;
                     products[i].totalProduct = products[i].productAdd * price;
                     totalElement.innerHTML = `<p><b>$ ${products[i].totalProduct}</b> - ${products[i].productAdd} U`;
-
-                    if(products[i].productAdd === 0){
-                        products[i].delete == false ? products[i].delete = true : products[i].delete = false;
-                        contOptions.innerHTML = " ";
-                    }
                     arrTotal[index-1] = products[i].totalProduct; 
                     const result = arrTotal.reduce((acm, cv) => acm + cv,0);  
                     pay.innerHTML = " ";
@@ -200,3 +188,4 @@ const api = async() =>{
     }
 }
 api()
+
