@@ -239,3 +239,14 @@ h2.title{
     background-color: rgba(91, 91, 249, 0.871);
     cursor: pointer;
 }
+
+.pay{
+    background-color: rgb(229, 225, 225); 
+    padding: 10px;
+    color: black;
+    width: 150px;
+    position: relative;
+    border-radius: 10px;
+    right:180px;
+}
+
